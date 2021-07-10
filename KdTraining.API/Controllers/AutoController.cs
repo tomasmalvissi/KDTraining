@@ -22,7 +22,12 @@ namespace KdTraining.API.Controllers
                 };
             }
         }
-
+        /// <summary>
+        /// Recupera el listado de autos registrados.
+        /// </summary>
+        /// <param name="marca">Marca del auto</param>
+        /// <param name="titular">Nombre del titular del auto</param>
+        /// <returns>Lista de autos</returns>
         [HttpGet] //api/autos?marca=...&titular=...     1 o los 2
         public IActionResult Get(string marca, string titular)
         {
@@ -33,6 +38,11 @@ namespace KdTraining.API.Controllers
 
             return Ok(autos);
         }
+        /// <summary>
+        /// Recupera el auto que esta registrado con una patente en especifico.
+        /// </summary>
+        /// <param name="patente">Patente</param>
+        /// <returns>Auto encontrado</returns>
         [HttpGet("{patente}")]
         public IActionResult Get(string patente)
         {
@@ -88,7 +98,7 @@ namespace KdTraining.API.Controllers
             }
 
             if (!string.IsNullOrWhiteSpace(patente) || patente != model.Patente)
-            {
+           {
                 var patenterepetida = _datos.Any(a => a.Patente == model.Patente);
                 if (patenterepetida)
                 {
